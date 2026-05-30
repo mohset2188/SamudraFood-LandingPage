@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV. Samudra Food - Distributor Premium Orange Tobiko</title>
+    <meta name="description" content="Supplier Tobiko Orange berkualitas untuk reseller, UMKM, dan usaha kuliner di Indonesia. Harga kompetitif mulai Rp150.000/500gr.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        ocean: {
+                            50: '#f0f8ff',
+                            100: '#e0f0fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            800: '#075985',
+                            900: '#0c4a6e', // Deep Ocean Blue
+                        },
+                        tangerine: {
+                            400: '#fb923c',
+                            500: '#f97316', // Primary Orange
+                            600: '#ea580c',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Animations & Specific Styling -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Scroll Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay utilities */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        /* Blob Backgrounds */
+        .bg-blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            border-radius: 50%;
+        }
+        
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #10B981;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 relative overflow-x-hidden">
+
+    <!-- Toast Notification -->
+    <div id="toast">Pesan berhasil dikirim! Kami akan segera menghubungi Anda.</div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6281111832657?text=Halo%20CV.%20Samudra%20Food,%20saya%20ingin%20bertanya%20tentang%20Tobiko%20Orange" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl z-50 hover:bg-[#1ebe5d] transition-all hover:scale-110 flex items-center justify-center group">
+        <i class="fab fa-whatsapp text-3xl"></i>
+        <span class="absolute right-full mr-4 bg-white text-slate-800 px-3 py-1 text-sm font-medium rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Chat Kami</span>
+    </a>
+
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-ocean-900 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                        SF
+                    </div>
+                    <span class="font-bold text-xl text-ocean-900 tracking-tight">Samudra Food</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#beranda" class="text-slate-600 hover:text-tangerine-500 font-medium transition-colors">Beranda</a>
+                    <a href="#tentang" class="text-slate-600 hover:text-tangerine-500 font-medium transition-colors">Tentang</a>
+                    <a href="#produk" class="text-slate-600 hover:text-tangerine-500 font-medium transition-colors">Produk & Harga</a>
+                    <a href="#keunggulan" class="text-slate-600 hover:text-tangerine-500 font-medium transition-colors">Keunggulan</a>
+                    <a href="#testimoni" class="text-slate-600 hover:text-tangerine-500 font-medium transition-colors">Testimoni</a>
+                    <a href="#contact" class="bg-tangerine-500 hover:bg-tangerine-600 text-white px-5 py-2.5 rounded-full font-medium transition-colors shadow-md shadow-tangerine-500/30">Minta Pricelist</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-ocean-900 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#beranda" class="block px-3 py-2 text-base font-medium text-slate-700 hover:text-tangerine-500 hover:bg-slate-50 rounded-md">Beranda</a>
+                <a href="#tentang" class="block px-3 py-2 text-base font-medium text-slate-700 hover:text-tangerine-500 hover:bg-slate-50 rounded-md">Tentang</a>
+                <a href="#produk" class="block px-3 py-2 text-base font-medium text-slate-700 hover:text-tangerine-500 hover:bg-slate-50 rounded-md">Produk & Harga</a>
+                <a href="#keunggulan" class="block px-3 py-2 text-base font-medium text-slate-700 hover:text-tangerine-500 hover:bg-slate-50 rounded-md">Keunggulan</a>
+                <a href="#faq" class="block px-3 py-2 text-base font-medium text-slate-700 hover:text-tangerine-500 hover:bg-slate-50 rounded-md">FAQ</a>
+                <a href="#contact" class="block px-3 py-2 mt-4 text-center text-base font-medium bg-tangerine-500 text-white rounded-md">Hubungi Kami</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="beranda" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Blobs -->
+        <div class="bg-blob bg-ocean-100 w-96 h-96 -top-20 -left-20"></div>
+        <div class="bg-blob bg-orange-50 w-96 h-96 top-40 -right-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                
+                <!-- Hero Content -->
+                <div class="max-w-2xl fade-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-tangerine-600 font-semibold text-sm mb-6 border border-orange-200 shadow-sm">
+                        <span>🔥</span> Harga Mulai Rp150.000 / 500gr
+                    </div>
+                    
+                    <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-ocean-900 leading-tight mb-6">
+                        Supplier <span class="text-tangerine-500">Tobiko Orange</span> Berkualitas untuk Reseller & Usaha Kuliner
+                    </h1>
+                    
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                        CV. Samudra Food menyediakan Tobiko Orange berkualitas dengan warna cerah, tekstur premium, dan pasokan stabil untuk reseller, toko frozen food, UMKM kuliner, usaha sushi, catering, dan berbagai bisnis makanan di Indonesia.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                        <a href="#contact" class="flex items-center justify-center gap-2 bg-tangerine-500 hover:bg-tangerine-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all shadow-lg shadow-tangerine-500/30 hover:-translate-y-1">
+                            Minta Pricelist <i class="fas fa-arrow-right text-sm"></i>
+                        </a>
+                        <a href="https://wa.me/6281111832657?text=Halo%20CV.%20Samudra%20Food,%20saya%20ingin%20bertanya%20tentang%20Tobiko%20Orange" target="_blank" class="flex items-center justify-center gap-2 bg-white text-ocean-900 border-2 border-ocean-100 hover:border-ocean-900 px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:-translate-y-1 shadow-sm">
+                            <i class="fab fa-whatsapp text-[#25D366] text-xl"></i> Chat WhatsApp
+                        </a>
+                    </div>
+                    
+                    <!-- Trust Indicators -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-200">
+                        <div class="flex items-center gap-2 text-sm text-slate-600 font-medium">
+                            <i class="fas fa-check-circle text-tangerine-500"></i> Harga Kompetitif
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600 font-medium">
+                            <i class="fas fa-check-circle text-tangerine-500"></i> Produk Berkualitas
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600 font-medium">
+                            <i class="fas fa-check-circle text-tangerine-500"></i> Cocok untuk Reseller
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600 font-medium">
+                            <i class="fas fa-check-circle text-tangerine-500"></i> Pengiriman Nasional
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Image -->
+                <div class="relative lg:ml-auto fade-up delay-200">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-ocean-500 to-tangerine-400 rounded-3xl transform rotate-3 opacity-20 blur-lg"></div>
+                    <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Premium Orange Tobiko Sushi" class="relative rounded-3xl shadow-2xl w-full object-cover h-[400px] lg:h-[550px] border-4 border-white">
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 border border-slate-100">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xl">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-500 font-medium">Kualitas</p>
+                            <p class="font-bold text-ocean-900">Premium Grade</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tentang" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center fade-up">
+                <span class="text-tangerine-500 font-semibold tracking-wider uppercase text-sm mb-2 block">Profil Perusahaan</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-ocean-900 mb-8">Tentang CV. Samudra Food</h2>
+                <div class="w-20 h-1 bg-tangerine-500 mx-auto mb-8 rounded-full"></div>
+                
+                <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                    CV. Samudra Food adalah distributor Tobiko Orange yang berkomitmen menyediakan produk berkualitas dengan harga kompetitif dan pelayanan yang responsif.
+                </p>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    Kami memahami kebutuhan reseller dan pelaku usaha kuliner yang membutuhkan bahan baku berkualitas dengan pasokan yang konsisten untuk mendukung pertumbuhan bisnis mereka di seluruh Indonesia.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="produk" class="py-20 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Product Feature -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+                <div class="order-2 lg:order-1 fade-up">
+                    <img src="https://images.unsplash.com/photo-1617196034183-421b4917c92d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Detail Tobiko Orange" class="rounded-2xl shadow-lg border-8 border-white">
+                </div>
+                <div class="order-1 lg:order-2 fade-up delay-100">
+                    <span class="text-tangerine-500 font-semibold tracking-wider uppercase text-sm mb-2 block">Spesifikasi</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-ocean-900 mb-6">Tobiko Orange Premium</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed text-lg">
+                        Tobiko Orange merupakan telur ikan terbang dengan warna oranye cerah, tekstur renyah, dan sensasi "pop" yang khas saat dikunyah. Sangat ideal digunakan untuk berbagai menu sushi, mentai, dan kreasi kuliner fusion lainnya.
+                    </p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-ocean-100 text-ocean-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-xs"></i></div>
+                            <span class="text-slate-700 font-medium text-lg">Warna Oranye Cerah Alami</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-ocean-100 text-ocean-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-xs"></i></div>
+                            <span class="text-slate-700 font-medium text-lg">Tekstur Renyah Premium (Sensasi Pop)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-ocean-100 text-ocean-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-xs"></i></div>
+                            <span class="text-slate-700 font-medium text-lg">Kualitas Higienis Terjaga</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-ocean-100 text-ocean-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-xs"></i></div>
+                            <span class="text-slate-700 font-medium text-lg">Cocok untuk Sushi dan Fusion Food</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-ocean-100 text-ocean-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-xs"></i></div>
+                            <span class="text-slate-700 font-medium text-lg">Tersedia untuk Grosir / Partai Besar</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-ocean-100 text-ocean-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-xs"></i></div>
+                            <span class="text-slate-700 font-medium text-lg">Pasokan Stabil Sepanjang Tahun</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Pricing Highlight Box -->
+            <div class="max-w-4xl mx-auto fade-up">
+                <div class="bg-white rounded-3xl shadow-soft border border-slate-100 overflow-hidden relative">
+                    <!-- Decorative background element -->
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-ocean-50 to-orange-50 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                    
+                    <div class="p-8 md:p-12 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+                        
+                        <div class="flex-1">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-ocean-600 font-semibold text-xs uppercase tracking-wider mb-4 border border-blue-100">
+                                Penawaran Terbaik
+                            </div>
+                            <h3 class="text-2xl font-bold text-ocean-900 mb-2">Harga Khusus Reseller</h3>
+                            <p class="text-slate-500 mb-6 max-w-md">Harga kompetitif yang dirancang khusus untuk membantu reseller dan UMKM meningkatkan margin keuntungan usaha.</p>
+                            
+                            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                                <span class="px-3 py-1 bg-slate-100 text-slate-600 text-sm rounded-md"><i class="fas fa-store text-tangerine-500 mr-1"></i> Cocok untuk UMKM</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-600 text-sm rounded-md"><i class="fas fa-boxes text-tangerine-500 mr-1"></i> Harga Volume Besar</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-600 text-sm rounded-md"><i class="fas fa-truck text-tangerine-500 mr-1"></i> Siap Kirim</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-ocean-900 to-ocean-800 p-8 rounded-2xl text-white text-center min-w-[300px] shadow-xl">
+                            <p class="text-ocean-200 text-sm font-medium mb-1">Mulai dari</p>
+                            <div class="text-4xl md:text-5xl font-extrabold mb-2 text-tangerine-400">Rp150<span class="text-2xl">.000</span></div>
+                            <p class="text-ocean-100 mb-6">per 500 gram</p>
+                            <a href="#contact" class="block w-full bg-tangerine-500 hover:bg-tangerine-600 text-white py-3 rounded-lg font-semibold transition-colors">
+                                Dapatkan Harga Grosir
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="keunggulan" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-up">
+                <span class="text-tangerine-500 font-semibold tracking-wider uppercase text-sm mb-2 block">Nilai Tambah Kami</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-ocean-900 mb-4">Kenapa Memilih CV. Samudra Food?</h2>
+                <div class="w-20 h-1 bg-tangerine-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-soft transition-all hover:-translate-y-1 fade-up">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center text-tangerine-500 text-2xl mb-6">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean-900 mb-3">Kualitas Terjaga</h3>
+                    <p class="text-slate-600 leading-relaxed">Produk Tobiko dipilih dengan cermat dan disimpan dengan standar suhu yang ketat untuk menjaga kesegaran.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-soft transition-all hover:-translate-y-1 fade-up delay-100">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center text-tangerine-500 text-2xl mb-6">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean-900 mb-3">Harga Kompetitif</h3>
+                    <p class="text-slate-600 leading-relaxed">Struktur harga grosir yang dirancang untuk membantu reseller memperoleh margin keuntungan yang lebih baik.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-soft transition-all hover:-translate-y-1 fade-up delay-200">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center text-tangerine-500 text-2xl mb-6">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean-900 mb-3">Cocok untuk Reseller</h3>
+                    <p class="text-slate-600 leading-relaxed">Fokus melayani kebutuhan bisnis yang ingin menjual kembali produk dengan dukungan B2B yang solid.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-soft transition-all hover:-translate-y-1 fade-up">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center text-tangerine-500 text-2xl mb-6">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean-900 mb-3">Pasokan Stabil</h3>
+                    <p class="text-slate-600 leading-relaxed">Kapasitas penyimpanan yang besar memastikan bisnis Anda tetap berjalan tanpa khawatir kehabisan stok.</p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-soft transition-all hover:-translate-y-1 fade-up delay-100">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center text-tangerine-500 text-2xl mb-6">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean-900 mb-3">Pelayanan Responsif</h3>
+                    <p class="text-slate-600 leading-relaxed">Tim sales dan support kami siap membantu dan menjawab kebutuhan pesanan pelanggan dengan cepat.</p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-soft transition-all hover:-translate-y-1 fade-up delay-200">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center text-tangerine-500 text-2xl mb-6">
+                        <i class="fas fa-truck-fast"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean-900 mb-3">Pengiriman Seluruh Indonesia</h3>
+                    <p class="text-slate-600 leading-relaxed">Bekerjasama dengan ekspedisi terpercaya melayani berbagai daerah dengan packaging pengiriman yang aman.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-ocean-900 text-white relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Solusi untuk Berbagai Jenis Usaha</h2>
+                    <p class="text-ocean-100 text-lg mb-8">Kami mensuplai bahan baku berkualitas untuk berbagai skala bisnis kuliner di Indonesia.</p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-ocean-800/50 backdrop-blur border border-ocean-700 p-4 rounded-xl flex items-center gap-3">
+                            <i class="fas fa-store-alt text-tangerine-400"></i>
+                            <span class="font-medium">Reseller Frozen Food</span>
+                        </div>
+                        <div class="bg-ocean-800/50 backdrop-blur border border-ocean-700 p-4 rounded-xl flex items-center gap-3">
+                            <i class="fas fa-snowflake text-tangerine-400"></i>
+                            <span class="font-medium">Toko Frozen Food</span>
+                        </div>
+                        <div class="bg-ocean-800/50 backdrop-blur border border-ocean-700 p-4 rounded-xl flex items-center gap-3">
+                            <i class="fas fa-utensils text-tangerine-400"></i>
+                            <span class="font-medium">UMKM Kuliner</span>
+                        </div>
+                        <div class="bg-ocean-800/50 backdrop-blur border border-ocean-700 p-4 rounded-xl flex items-center gap-3">
+                            <i class="fas fa-home text-tangerine-400"></i>
+                            <span class="font-medium">Usaha Sushi Rumahan</span>
+                        </div>
+                        <div class="bg-ocean-800/50 backdrop-blur border border-ocean-700 p-4 rounded-xl flex items-center gap-3">
+                            <i class="fas fa-concierge-bell text-tangerine-400"></i>
+                            <span class="font-medium">Catering</span>
+                        </div>
+                        <div class="bg-ocean-800/50 backdrop-blur border border-ocean-700 p-4 rounded-xl flex items-center gap-3">
+                            <i class="fas fa-torii-gate text-tangerine-400"></i>
+                            <span class="font-medium">Kedai Jepang</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Area -->
+                <div class="grid grid-cols-2 gap-6 fade-up delay-200">
+                    <div class="bg-white text-center p-8 rounded-2xl shadow-xl transform lg:-translate-y-6">
+                        <div class="text-4xl font-extrabold text-ocean-900 mb-2">100+</div>
+                        <div class="text-slate-500 font-medium">Pelanggan Usaha Kuliner</div>
+                    </div>
+                    <div class="bg-tangerine-500 text-center p-8 rounded-2xl shadow-xl transform lg:translate-y-6">
+                        <div class="text-4xl font-extrabold text-white mb-2">10+</div>
+                        <div class="text-orange-100 font-medium">Kota Terlayani</div>
+                    </div>
+                    <div class="bg-white text-center p-8 rounded-2xl shadow-xl transform lg:-translate-y-6">
+                        <div class="text-4xl font-extrabold text-ocean-900 mb-2"><i class="fas fa-users"></i></div>
+                        <div class="text-slate-500 font-medium">Reseller Aktif</div>
+                    </div>
+                    <div class="bg-white text-center p-8 rounded-2xl shadow-xl transform lg:translate-y-6">
+                        <div class="text-4xl font-extrabold text-ocean-900 mb-2"><i class="fas fa-handshake"></i></div>
+                        <div class="text-slate-500 font-medium">Mitra Jangka Panjang</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-10 border-t border-ocean-700 fade-up">
+                <p class="text-xl text-ocean-100 font-medium mb-8">Dipercaya Berbagai Pelaku Usaha Kuliner</p>
+                <!-- Client Logos (Placeholders styling) -->
+                <div class="flex flex-wrap justify-center gap-8 md:gap-12 opacity-70 grayscale">
+                    <div class="h-10 flex items-center"><span class="text-2xl font-bold tracking-widest uppercase">SushiKu</span></div>
+                    <div class="h-10 flex items-center"><span class="text-2xl font-bold tracking-widest uppercase">MentaiCo</span></div>
+                    <div class="h-10 flex items-center"><span class="text-2xl font-bold tracking-widest uppercase">FrozenMart</span></div>
+                    <div class="h-10 flex items-center"><span class="text-2xl font-bold tracking-widest uppercase">BentoBox</span></div>
+                    <div class="h-10 flex items-center"><span class="text-2xl font-bold tracking-widest uppercase">Caterina</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-ocean-900 mb-4">Cara Pemesanan Mudah</h2>
+                <div class="w-20 h-1 bg-tangerine-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="relative max-w-4xl mx-auto fade-up delay-100">
+                <!-- Desktop Timeline Line -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-slate-200 -translate-y-1/2 z-0"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center text-center relative group">
+                        <div class="hidden md:block absolute top-10 left-1/2 w-full h-1 bg-tangerine-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 z-0"></div>
+                        <div class="w-20 h-20 bg-white rounded-full border-4 border-slate-100 flex items-center justify-center text-ocean-900 text-2xl font-bold shadow-sm mb-4 relative z-10 group-hover:border-tangerine-500 group-hover:text-tangerine-500 transition-colors">
+                            1
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-800 mb-2">Hubungi Tim Kami</h4>
+                        <p class="text-slate-500 text-sm">Via WhatsApp atau Form Kontak</p>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center text-center relative group">
+                        <div class="hidden md:block absolute top-10 left-1/2 w-full h-1 bg-tangerine-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 z-0"></div>
+                        <div class="w-20 h-20 bg-white rounded-full border-4 border-slate-100 flex items-center justify-center text-ocean-900 text-2xl font-bold shadow-sm mb-4 relative z-10 group-hover:border-tangerine-500 group-hover:text-tangerine-500 transition-colors">
+                            2
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-800 mb-2">Dapatkan Pricelist</h4>
+                        <p class="text-slate-500 text-sm">Kami kirimkan harga khusus reseller</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center text-center relative group">
+                         <div class="hidden md:block absolute top-10 left-1/2 w-full h-1 bg-tangerine-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 z-0"></div>
+                        <div class="w-20 h-20 bg-white rounded-full border-4 border-slate-100 flex items-center justify-center text-ocean-900 text-2xl font-bold shadow-sm mb-4 relative z-10 group-hover:border-tangerine-500 group-hover:text-tangerine-500 transition-colors">
+                            3
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-800 mb-2">Konfirmasi Pesanan</h4>
+                        <p class="text-slate-500 text-sm">Tentukan volume dan selesaikan pembayaran</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col items-center text-center relative group">
+                        <div class="w-20 h-20 bg-white rounded-full border-4 border-slate-100 flex items-center justify-center text-ocean-900 text-2xl font-bold shadow-sm mb-4 relative z-10 group-hover:border-tangerine-500 group-hover:text-tangerine-500 transition-colors">
+                            4
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-800 mb-2">Produk Dikirim</h4>
+                        <p class="text-slate-500 text-sm">Pengiriman aman ke lokasi Anda</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimoni" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-up">
+                <span class="text-tangerine-500 font-semibold tracking-wider uppercase text-sm mb-2 block">Ulasan</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-ocean-900 mb-4">Apa Kata Pelanggan Kami?</h2>
+                <div class="w-20 h-1 bg-tangerine-500 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Testimonial Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-up delay-100">
+                
+                <!-- Card 1 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 shadow-sm relative hover:shadow-soft transition-all hover:-translate-y-1 flex flex-col h-full">
+                    <i class="fas fa-quote-left absolute top-6 left-6 text-4xl text-slate-200 opacity-50 z-0"></i>
+                    <div class="relative z-10 flex-grow flex flex-col">
+                        <div class="flex text-tangerine-400 mb-5 text-sm gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-lg text-slate-700 italic font-medium mb-8 leading-relaxed flex-grow">
+                            "Produk segar, warna cerah, dan teksturnya renyah pas digigit. Kualitasnya sangat konsisten setiap kali order, pelanggan sushi rumahan saya menyukainya."
+                        </p>
+                        <div class="border-t border-slate-200 pt-5 mt-auto">
+                            <div class="font-bold text-ocean-900 text-lg">Budi Santoso</div>
+                            <div class="text-sm text-slate-500">Owner Usaha Sushi Rumahan, Jakarta</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 shadow-sm relative hover:shadow-soft transition-all hover:-translate-y-1 flex flex-col h-full">
+                    <i class="fas fa-quote-left absolute top-6 left-6 text-4xl text-slate-200 opacity-50 z-0"></i>
+                    <div class="relative z-10 flex-grow flex flex-col">
+                        <div class="flex text-tangerine-400 mb-5 text-sm gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-lg text-slate-700 italic font-medium mb-8 leading-relaxed flex-grow">
+                            "Harga yang ditawarkan sangat cocok untuk reseller seperti kami. Margin keuntungannya bagus dan proses pengirimannya ke luar kota cepat dan aman."
+                        </p>
+                        <div class="border-t border-slate-200 pt-5 mt-auto">
+                            <div class="font-bold text-ocean-900 text-lg">Siti Aminah</div>
+                            <div class="text-sm text-slate-500">Distributor Frozen Food, Bandung</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 shadow-sm relative hover:shadow-soft transition-all hover:-translate-y-1 flex flex-col h-full">
+                    <i class="fas fa-quote-left absolute top-6 left-6 text-4xl text-slate-200 opacity-50 z-0"></i>
+                    <div class="relative z-10 flex-grow flex flex-col">
+                        <div class="flex text-tangerine-400 mb-5 text-sm gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-lg text-slate-700 italic font-medium mb-8 leading-relaxed flex-grow">
+                            "Pelayanan adminnya sangat responsif. Yang terpenting, stoknya relatif selalu tersedia jadi kami tidak khawatir kehabisan bahan baku saat ramai orderan."
+                        </p>
+                        <div class="border-t border-slate-200 pt-5 mt-auto">
+                            <div class="font-bold text-ocean-900 text-lg">Hendra Wijaya</div>
+                            <div class="text-sm text-slate-500">Pemilik Kedai Mentai, Surabaya</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-20 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-up">
+                <h2 class="text-3xl font-bold text-ocean-900 mb-4">Pertanyaan yang Sering Diajukan (FAQ)</h2>
+                <div class="w-20 h-1 bg-tangerine-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="space-y-4 fade-up delay-100" id="accordion">
+                <!-- FAQ 1 -->
+                <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none faq-btn">
+                        <span class="font-semibold text-slate-800 text-lg">Apakah melayani reseller?</span>
+                        <i class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="px-6 pb-4 text-slate-600 hidden faq-content">
+                        Ya, fokus utama kami adalah melayani reseller, agen, toko frozen food, dan berbagai pelaku usaha kuliner lainnya. Kami menyediakan dukungan B2B yang lengkap.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none faq-btn">
+                        <span class="font-semibold text-slate-800 text-lg">Berapa minimal pembelian?</span>
+                        <i class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="px-6 pb-4 text-slate-600 hidden faq-content">
+                        Minimal pembelian dapat bervariasi. Harga yang tertera mulai dari Rp150.000 untuk kemasan 500gr. Silakan hubungi tim sales kami melalui WhatsApp untuk informasi terbaru mengenai minimal order grosir.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none faq-btn">
+                        <span class="font-semibold text-slate-800 text-lg">Apakah bisa kirim ke luar kota?</span>
+                        <i class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="px-6 pb-4 text-slate-600 hidden faq-content">
+                        Tentu saja. Kami melayani pengiriman ke seluruh wilayah di Indonesia menggunakan jasa ekspedisi terpercaya yang dilengkapi dengan cold storage atau packaging khusus agar produk tetap aman sampai tujuan.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none faq-btn">
+                        <span class="font-semibold text-slate-800 text-lg">Apakah tersedia harga grosir?</span>
+                        <i class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="px-6 pb-4 text-slate-600 hidden faq-content">
+                        Ya, kami memberikan harga khusus (diskon volume) untuk pembelian dalam jumlah tertentu. Semakin besar volume pembelian, semakin kompetitif harga yang kami berikan.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-white">
+        <!-- CTA Banner -->
+        <div class="bg-gradient-to-r from-ocean-900 to-ocean-700 py-16 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Siap Menjadi Mitra Bisnis Tobiko Anda?</h2>
+                <p class="text-xl text-ocean-100 max-w-2xl mx-auto mb-10">Dapatkan produk berkualitas, harga kompetitif, dan dukungan terbaik untuk mengembangkan usaha kuliner Anda hari ini.</p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="document.getElementById('nama').focus()" class="bg-tangerine-500 hover:bg-tangerine-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg transition-transform hover:-translate-y-1">
+                        Minta Pricelist Sekarang
+                    </button>
+                    <a href="https://wa.me/6281111832657?text=Halo%20CV.%20Samudra%20Food,%20saya%20ingin%20bertanya%20tentang%20Tobiko%20Orange" target="_blank" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-8 py-4 rounded-xl font-bold text-lg backdrop-blur-sm transition-transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Chat WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-5 gap-12">
+                <!-- Form -->
+                <div class="lg:col-span-3 bg-white rounded-2xl shadow-soft border border-slate-100 p-8 md:p-10 fade-up">
+                    <h3 class="text-2xl font-bold text-ocean-900 mb-2">Dapatkan Penawaran Terbaik</h3>
+                    <p class="text-slate-500 mb-8">Isi formulir di bawah ini dan tim kami akan segera menghubungi Anda mengirimkan pricelist terbaru.</p>
+                    
+                    <form id="contactForm" class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label for="nama" class="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap *</label>
+                                <input type="text" id="nama" required class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 outline-none transition-colors" placeholder="Cth: Budi">
+                            </div>
+                            <div>
+                                <label for="usaha" class="block text-sm font-medium text-slate-700 mb-1">Nama Usaha</label>
+                                <input type="text" id="usaha" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 outline-none transition-colors" placeholder="Cth: SushiKu">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label for="whatsapp" class="block text-sm font-medium text-slate-700 mb-1">Nomor WhatsApp *</label>
+                                <input type="tel" id="whatsapp" required class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 outline-none transition-colors" placeholder="0812xxxxxx">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 outline-none transition-colors" placeholder="email@anda.com">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="pesan" class="block text-sm font-medium text-slate-700 mb-1">Pesan / Kebutuhan</label>
+                            <textarea id="pesan" rows="4" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 outline-none transition-colors resize-none" placeholder="Saya tertarik menjadi reseller..."></textarea>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="w-full bg-ocean-900 hover:bg-ocean-800 text-white py-4 rounded-xl font-bold text-lg transition-colors flex justify-center items-center gap-2">
+                            <span>Kirim Permintaan</span> <i class="fas fa-paper-plane text-sm"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Info Side -->
+                <div class="lg:col-span-2 flex flex-col justify-center fade-up delay-100">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 mb-6">
+                        <h4 class="text-xl font-bold text-ocean-900 mb-6">Hubungi Kami Langsung</h4>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center flex-shrink-0 text-xl">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-500 font-medium">WhatsApp / Telepon</p>
+                                    <a href="https://wa.me/6281111832657" target="_blank" class="text-lg font-bold text-slate-800 hover:text-tangerine-500 transition-colors">+62 812-XXXX-XXXX</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center flex-shrink-0 text-xl">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-500 font-medium">Email</p>
+                                    <a href="mailto:info@samudrafood.com" class="text-lg font-bold text-slate-800 hover:text-tangerine-500 transition-colors">info@samudrafood.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-orange-100 text-tangerine-600 rounded-full flex items-center justify-center flex-shrink-0 text-xl">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-500 font-medium">Alamat Kantor/Gudang</p>
+                                    <p class="text-slate-800 font-medium">Jl. Samudra Niaga No. 88, Jakarta Barat, Indonesia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-ocean-900 pt-16 pb-8 border-t border-ocean-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-ocean-900 font-bold text-xl">
+                            SF
+                        </div>
+                        <span class="font-bold text-xl text-white tracking-tight">CV. Samudra Food</span>
+                    </div>
+                    <p class="text-ocean-100 mb-6 text-sm leading-relaxed">
+                        Mitra terpercaya untuk pasokan Tobiko Orange premium. Memberikan solusi bahan baku terbaik untuk pertumbuhan bisnis kuliner di Indonesia.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-ocean-800 flex items-center justify-center text-white hover:bg-tangerine-500 transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-ocean-800 flex items-center justify-center text-white hover:bg-tangerine-500 transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-ocean-800 flex items-center justify-center text-white hover:bg-tangerine-500 transition-colors"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links 1 -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Menu Utama</h4>
+                    <ul class="space-y-3 text-ocean-100 text-sm">
+                        <li><a href="#beranda" class="hover:text-tangerine-400 transition-colors">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-tangerine-400 transition-colors">Tentang Kami</a></li>
+                        <li><a href="#produk" class="hover:text-tangerine-400 transition-colors">Produk Tobiko</a></li>
+                        <li><a href="#produk" class="hover:text-tangerine-400 transition-colors">Harga Reseller</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links 2 -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Informasi</h4>
+                    <ul class="space-y-3 text-ocean-100 text-sm">
+                        <li><a href="#keunggulan" class="hover:text-tangerine-400 transition-colors">Keunggulan Kami</a></li>
+                        <li><a href="#testimoni" class="hover:text-tangerine-400 transition-colors">Pelanggan</a></li>
+                        <li><a href="#faq" class="hover:text-tangerine-400 transition-colors">FAQ</a></li>
+                        <li><a href="#contact" class="hover:text-tangerine-400 transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Hubungi Kami</h4>
+                    <ul class="space-y-4 text-ocean-100 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fab fa-whatsapp mt-1 text-tangerine-400"></i>
+                            <a href="https://wa.me/6281111832657" target="_blank" class="hover:text-white transition-colors">+62 812-XXXX-XXXX</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-envelope mt-1 text-tangerine-400"></i>
+                            <a href="mailto:info@samudrafood.com" class="hover:text-white transition-colors">info@samudrafood.com</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-envelope mt-1 text-tangerine-400"></i>
+                            <span>info@samudrafood.com</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-tangerine-400"></i>
+                            <span>Jakarta, Indonesia</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-ocean-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-ocean-200">
+                <p>&copy; 2026 CV. Samudra Food. Hak Cipta Dilindungi.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
+                    <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Navbar Scroll Effect & Mobile Menu ---
+            const navbar = document.getElementById('navbar');
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.remove('shadow-sm', 'bg-white/90');
+                    navbar.classList.add('bg-white');
+                } else {
+                    navbar.classList.remove('shadow-md', 'bg-white');
+                    navbar.classList.add('shadow-sm', 'bg-white/90');
+                }
+            });
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- Scroll Animations (Intersection Observer) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-up').forEach((el) => {
+                observer.observe(el);
+            });
+
+            // --- FAQ Accordion Logic ---
+            const faqBtns = document.querySelectorAll('.faq-btn');
+            
+            faqBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector('i');
+                    
+                    // Close others
+                    faqBtns.forEach(otherBtn => {
+                        if (otherBtn !== btn) {
+                            otherBtn.nextElementSibling.classList.add('hidden');
+                            otherBtn.querySelector('i').style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    // Toggle current
+                    content.classList.toggle('hidden');
+                    if (content.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            // --- Form Submission Redirect to WhatsApp ---
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const toast = document.getElementById('toast');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Mencegah halaman me-refresh
+                
+                // 1. Ambil data dari inputan form
+                const nama = document.getElementById('nama').value;
+                const usaha = document.getElementById('usaha').value || '-';
+                const noWa = document.getElementById('whatsapp').value;
+                const email = document.getElementById('email').value || '-';
+                const pesan = document.getElementById('pesan').value || '-';
+                
+                // 2. Tentukan Nomor WhatsApp Tujuan (Ganti dengan nomor CS/Anda)
+                // Pastikan format nomor diawali dengan 62 (contoh: 6281111832657)
+                const targetWA = "6281111832657";
+                
+                // 3. Susun format pesan yang akan dikirim ke WhatsApp
+                // %0A adalah kode URL untuk Enter / Baris Baru
+                const textMessage = `Halo Tim CV. Samudra Food,%0A%0ASaya tertarik dan ingin berdiskusi lebih lanjut / meminta pricelist. Berikut adalah data saya:%0A%0A*Nama:* ${nama}%0A*Nama Usaha:* ${usaha}%0A*No WhatsApp:* ${noWa}%0A*Email:* ${email}%0A*Pesan / Kebutuhan:*%0A${pesan}%0A%0AMohon info lebih lanjut. Terima kasih.`;
+                
+                // 4. Ubah tombol menjadi status loading sebentar
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengarahkan ke WhatsApp...';
+                submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                
+                setTimeout(() => {
+                    // 5. Buka tab baru ke WhatsApp dengan pesan yang sudah diformat
+                    const waLink = `https://wa.me/${targetWA}?text=${textMessage}`;
+                    window.open(waLink, '_blank');
+                    
+                    // 6. Tampilkan notifikasi sukses di web
+                    toast.className = "show";
+                    
+                    // 7. Kembalikan form dan tombol seperti semula
+                    form.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    
+                    // Sembunyikan notifikasi setelah 3 detik
+                    setTimeout(() => { 
+                        toast.className = toast.className.replace("show", ""); 
+                    }, 3000);
+                    
+                }, 800); // Jeda animasi 0.8 detik biar terlihat smooth
+            });
+        });
+    </script>
+</body>
+</html>
